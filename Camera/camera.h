@@ -16,7 +16,9 @@ enum Camera_Movement
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DWON,
 };
 
 // Default camera values
@@ -92,6 +94,10 @@ public:
             Position -= Right * velocity;
         if(direction == RIGHT)
             Position += Right * velocity;
+        if(direction == UP)
+            Position += WorldUp * velocity;
+        if(direction == DWON)
+            Position += -WorldUp * velocity;
     }
 
     // processes input received from a mouse input system. 
