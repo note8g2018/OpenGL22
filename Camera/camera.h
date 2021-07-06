@@ -19,6 +19,10 @@ enum Camera_Movement
     RIGHT,
     UP,
     DWON,
+    TURN_RIGHT,
+    TURN_LEFT,
+    LOOK_UP,
+    LOOK_DWON,
 };
 
 // Default camera values
@@ -85,6 +89,7 @@ public:
     // (to abstract it from windowing systems)
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
+        float turnScal = 14.0f;
         float velocity = MovementSpeed * deltaTime;
         if(direction == FORWARD)
             Position += Front * velocity;
@@ -98,6 +103,28 @@ public:
             Position += WorldUp * velocity;
         if(direction == DWON)
             Position += -WorldUp * velocity;
+        if(direction == TURN_RIGHT)
+        { 
+            //Position += -WorldUp * velocity;
+            Yaw += velocity * turnScal;
+
+            updateCameraVectors();
+        }
+        if(direction == TURN_LEFT)
+        {
+            Yaw -= velocity * turnScal;
+            updateCameraVectors();
+        }
+        if(direction == LOOK_UP)
+        {
+            Pitch += velocity * turnScal;
+            updateCameraVectors();
+        }
+        if(direction == LOOK_DWON)
+        {
+            Pitch -= velocity * turnScal;
+            updateCameraVectors();
+        }
     }
 
     // processes input received from a mouse input system. 
