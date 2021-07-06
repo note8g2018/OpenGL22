@@ -81,7 +81,7 @@ public:
     // returns the view matrix calculated using Euler Angles and the LookAt Matrix
     glm::mat4 GetViewMatrix()
     {
-        return glm::lookAt(Position, Position + Front, Up);
+        return glm::lookAt(Position, Position + Front, WorldUp);
     }
 
     // processes input received from any keyboard-like input system.
@@ -100,9 +100,9 @@ public:
         if(direction == RIGHT)
             Position += Right * velocity;
         if(direction == UP)
-            Position += WorldUp * velocity;
+            Position += Up * velocity;
         if(direction == DWON)
-            Position += -WorldUp * velocity;
+            Position += -Up * velocity;
         if(direction == TURN_RIGHT)
         { 
             //Position += -WorldUp * velocity;
