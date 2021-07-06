@@ -118,11 +118,15 @@ public:
         if(direction == LOOK_UP)
         {
             Pitch += velocity * turnScal;
+            if(Pitch > 89.0f)
+                Pitch = 89.0f;         
             updateCameraVectors();
         }
         if(direction == LOOK_DWON)
         {
-            Pitch -= velocity * turnScal;
+            Pitch -= velocity * turnScal;            
+            if(Pitch < -89.0f)
+                Pitch = -89.0f;
             updateCameraVectors();
         }
     }
@@ -155,10 +159,10 @@ public:
     void ProcessMouseScroll(float yoffset)
     {
         Zoom -= (float)yoffset;
-        if(Zoom < 1.0f)
-            Zoom = 1.0f;
-        if(Zoom > 45.0f)
-            Zoom = 45.0f;
+        if(Zoom < 0.5f)
+            Zoom = 0.5f;
+        if(Zoom > 150.0f)
+            Zoom = 150.0f;
     }
 
 private:
